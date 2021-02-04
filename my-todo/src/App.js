@@ -5,13 +5,15 @@ import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 
 function App() {
+  // this piece of state will be submit it again every time it runs
   const [inputText, setInputText] = useState("");
+  const [todos, setTodos] = useState([]);
   return (
     <div className="App">
       <header>
       <h1>Maria Todo List</h1>
       </header>
-      <Form setInputText={setInputText}/>
+      <Form todos={todos} setTodos={setTodos} setInputText={setInputText}/>
       <TodoList/>
     </div>
   );

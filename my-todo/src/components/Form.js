@@ -6,10 +6,14 @@ const Form = ({setInputText}) =>{
         console.log(e.target.value);
         setInputText(e.target.value);
     };
+    //prevents the refresh to lost the todo
+    const submitTodoHandler = (e) => {
+        e.preventDefault();
+    };
     return(
         <form>
             <input onChange={inputTextHandler} type="text" className="todo-input"/>
-            <button className="todo-button" type="submit">
+            <button onClick={submitTodoHandler} className="todo-button" type="submit">
                 <i className="fas fa-plus-square"></i>
             </button>
             <div className="select">
