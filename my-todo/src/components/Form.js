@@ -17,6 +17,10 @@ const Form = ({ setInputText, todos, setTodos, inputText }) => {
     //resetting our setInputText back to zero
     setInputText("");
   };
+  const statusHandler = (e) => {
+      console.log(e.target.value);
+
+  }
   return (
     <form>
       <input
@@ -29,7 +33,7 @@ const Form = ({ setInputText, todos, setTodos, inputText }) => {
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">
-        <select name="todos" className="filter-todo">
+        <select onChange={statusHandler} name="todos" className="filter-todo">
           <option name="todos" className="filter-todo">
             All
           </option>
