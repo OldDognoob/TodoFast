@@ -16,24 +16,27 @@ function App() {
   // But we can rerun this function if we add a value in the empty array we have in the end
   //Every time our todo changes run the above function
   useEffect(()=> {
+    //UseEffect
+    const filterHandler = () =>{
+      // eslint-disable-next-line default-case
+      switch(status){
+        case 'completed':
+          setFilteredTodos(todos.filter((todo) => todo.completed === true))
+          break;
+        case 'uncompleted':
+        setFilteredTodos(todos.filter((todo) => todo.uncompleted === false))
+        break;
+        default:
+          setFilteredTodos(todos);
+          break;
+      }
+    };
     filterHandler();
   }, [todos, status])
 
-  //Function
-  const filterHandler = () =>{
-    // eslint-disable-next-line default-case
-    switch(status){
-      case 'completed':
-        setFilteredTodos(todos.filter((todo) => todo.completed === true))
-        break;
-      case 'uncompleted':
-      setFilteredTodos(todos.filter((todo) => todo.uncompleted === false))
-      break;
-      default:
-        setFilteredTodos(todos);
-        break;
-    }
-  }
+  //Save to local Storage
+  
+
   return (
     <div className="App">
       <header>
