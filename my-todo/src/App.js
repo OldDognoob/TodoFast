@@ -12,30 +12,45 @@ function App() {
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
-   //useEffect : it will run only once when the component is rendered
+  // Only run one time when the app starts
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  //useEffect : it will run only once when the component is rendered
   // But we can rerun this function if we add a value in the empty array we have in the end
   //Every time our todo changes run the above function
-  useEffect(()=> {
+  useEffect(() => {
     //UseEffect
-    const filterHandler = () =>{
+    const filterHandler = () => {
       // eslint-disable-next-line default-case
-      switch(status){
-        case 'completed':
-          setFilteredTodos(todos.filter((todo) => todo.completed === true))
+      switch (status) {
+        case "completed":
+          setFilteredTodos(todos.filter((todo) => todo.completed === true));
           break;
-        case 'uncompleted':
-        setFilteredTodos(todos.filter((todo) => todo.uncompleted === false))
-        break;
+        case "uncompleted":
+          setFilteredTodos(todos.filter((todo) => todo.uncompleted === false));
+          break;
         default:
           setFilteredTodos(todos);
           break;
       }
     };
     filterHandler();
-  }, [todos, status])
+  }, [todos, status]);
 
   //Save to local Storage
-  
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+  const getLocalTodos = () => {
+    if (localStorage.getItem("todos") === null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoLocal);
+    }
+  };
 
   return (
     <div className="App">
@@ -47,10 +62,13 @@ function App() {
         todos={todos}
         setTodos={setTodos}
         setInputText={setInputText}
-        setStatus = {setStatus}
-        
+        setStatus={setStatus}
       />
-      <TodoList filteredTodos={filteredTodos} setTodos={setTodos} todos={todos} />
+      <TodoList
+        filteredTodos={filteredTodos}
+        setTodos={setTodos}
+        todos={todos}
+      />
     </div>
   );
 }
