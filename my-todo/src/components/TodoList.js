@@ -1,14 +1,17 @@
-import React from 'react';
+import React from "react";
 //import Components
 import Todo from "./Todo";
 
-const TodoList = () => {
-    return (
-        <div className="todo-container">
-            <ul className="todo-list">
-                <Todo/>
-            </ul>
-        </div>
-    )
-}
+const TodoList = ({ todos }) => {
+  console.log(todos);
+  return (
+    <div className="todo-container">
+      <ul className="todo-list">
+          {todos.map(todo => (
+              <Todo text = {todo.text} id={todo.id}/>
+          ))}
+          </ul>
+    </div>
+  );
+};
 export default TodoList;
