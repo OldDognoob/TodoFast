@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 //Importing Components
 import Form from "./components/Form";
@@ -11,6 +11,14 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
+
+   //useEffect : it will run only once when the component is rendered
+  // But we can rerun this function if we add a value in the empty array we have in the end
+  //Every time our todo changes run the above function
+  useEffect(()=> {
+    filterHandler();
+  }, [todos, status])
+
   //Function
   const filterHandler = () =>{
     // eslint-disable-next-line default-case
@@ -37,8 +45,9 @@ function App() {
         setTodos={setTodos}
         setInputText={setInputText}
         setStatus = {setStatus}
+        
       />
-      <TodoList setTodos={setTodos} todos={todos} />
+      <TodoList filteredTodos={filteredTodos} setTodos={setTodos} todos={todos} />
     </div>
   );
 }
